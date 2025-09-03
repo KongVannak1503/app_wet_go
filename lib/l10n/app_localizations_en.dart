@@ -19,4 +19,46 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get language => 'Language';
+
+  @override
+  String get totalActive => 'Total Active';
+
+  @override
+  String get totalInactive => 'Total Inactive';
+
+  @override
+  String get scan => 'Scan';
+
+  @override
+  String get scanQr => 'Scan QR';
+
+  @override
+  String get name => 'Name';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get phone => 'Phone';
+
+  @override
+  String get store => 'Store';
+
+  @override
+  String get stores => 'Stores';
+
+  @override
+  String get transaction => 'Transaction';
+
+  @override
+  String get discount => 'Discount';
+
+  @override
+  String get createStore => 'Create Store';
+
+  @override
+  String get storeManagement => 'Store Management';
+
+  @override
+  String get noTransactionYet => 'No transaction yet';
 }

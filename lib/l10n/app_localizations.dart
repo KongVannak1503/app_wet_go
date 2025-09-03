@@ -121,6 +121,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Language'**
   String get language;
+
+  /// No description provided for @totalActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Active'**
+  String get totalActive;
+
+  /// No description provided for @totalInactive.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Inactive'**
+  String get totalInactive;
+
+  /// No description provided for @scan.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan'**
+  String get scan;
+
+  /// No description provided for @scanQr.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan QR'**
+  String get scanQr;
+
+  /// No description provided for @name.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get name;
+
+  /// No description provided for @email.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get email;
+
+  /// No description provided for @phone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get phone;
+
+  /// No description provided for @store.
+  ///
+  /// In en, this message translates to:
+  /// **'Store'**
+  String get store;
+
+  /// No description provided for @stores.
+  ///
+  /// In en, this message translates to:
+  /// **'Stores'**
+  String get stores;
+
+  /// No description provided for @transaction.
+  ///
+  /// In en, this message translates to:
+  /// **'Transaction'**
+  String get transaction;
+
+  /// No description provided for @discount.
+  ///
+  /// In en, this message translates to:
+  /// **'Discount'**
+  String get discount;
+
+  /// No description provided for @createStore.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Store'**
+  String get createStore;
+
+  /// No description provided for @storeManagement.
+  ///
+  /// In en, this message translates to:
+  /// **'Store Management'**
+  String get storeManagement;
+
+  /// No description provided for @noTransactionYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No transaction yet'**
+  String get noTransactionYet;
 }
 
 class _AppLocalizationsDelegate

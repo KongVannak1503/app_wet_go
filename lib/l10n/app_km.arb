@@ -3,5 +3,19 @@
   "hello": "សួស្តី",
   "language": "ភាសា",
   "settings": "ការកំណត់",
-  "home": "ទំព័រដើម"
+  "home": "ទំព័រដើម",
+  "totalActive": "សរុបសកម្ម",
+  "totalInactive": "សរុបអសកម្ម",
+  "scan": "ស្កេន",
+  "scanQr": "ស្កេន QR",
+  "name": "ឈ្មោះ",
+  "email": "អ៊ីមែល",
+  "phone": "លេខទូរស័ព្ទ",
+  "store": "ហាង",
+  "stores": "ហាង",
+  "transaction": "ប្រតិបត្តិការ",
+  "discount": "បញ្ចុះតម្លៃ",
+  "createStore": "បង្កើតហាង",
+  "storeManagement": "ការគ្រប់គ្រងហាង",
+  "noTransactionYet": "មិនមានប្រតិបត្តិការណ៍នៅឡើយទេ"
 }

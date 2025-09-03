@@ -1,6 +1,21 @@
 {
+  "@@locale": "en",
   "home": "Home",
   "settings": "Settings",
   "dark_mode": "Dark Mode",
-  "language": "Language"
+  "language": "Language",
+  "totalActive": "Total Active",
+  "totalInactive": "Total Inactive",
+  "scan": "Scan",
+  "scanQr": "Scan QR",
+  "name": "Name",
+  "email": "Email",
+  "phone": "Phone",
+  "store": "Store",
+  "stores": "Stores",
+  "transaction": "Transaction",
+  "discount": "Discount",
+  "createStore": "Create Store",
+  "storeManagement": "Store Management",
+  "noTransactionYet": "No transaction yet"
 }

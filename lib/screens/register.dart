@@ -5,19 +5,19 @@ import 'package:wet_go/screens/widgets/btn/btn_text_primary.dart';
 import 'package:wet_go/screens/widgets/form/custom_text_field.dart';
 import 'package:go_router/go_router.dart';
 
-class AuthScreen extends StatefulWidget {
-  const AuthScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<AuthScreen> createState() => _AuthScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _AuthScreenState extends State<AuthScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final _form = GlobalKey<FormState>();
-  var _enteredEmail = '';
-  var _enteredPassword = '';
   var _isLoading = false;
-  String? _errorMessage;
+  var _enteredEmail = '';
+  var _enteredPhone = '';
+  var _enteredPassword = '';
 
   void _submit() async {
     final isValid = _form.currentState?.validate() ?? false;
@@ -25,36 +25,32 @@ class _AuthScreenState extends State<AuthScreen> {
 
     _form.currentState!.save();
 
-    setState(() {
-      _isLoading = true;
-      _errorMessage = null; // clear previous error
-    });
+    setState(() => _isLoading = true);
 
     final usersRepo = UsersRepository();
+    final result = await usersRepo.register(
+      _enteredEmail,
+      _enteredPhone,
+      _enteredPassword,
+    );
 
-    try {
-      final result = await usersRepo.login(_enteredEmail, _enteredPassword);
+    setState(() => _isLoading = false);
 
-      print("✅ Login successful: $result");
+    if (result.containsKey('error')) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(result['error']!)));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(result['message'] ?? 'Registration successful')),
+      );
 
-      // Navigate to home screen
-      context.go('/home');
-    } catch (e) {
-      // Catch errors like invalid email/password
-      setState(() {
-        _errorMessage = 'Invalid email or password';
-      });
-    } finally {
-      if (mounted) {
-        setState(() {
-          _isLoading = false;
-        });
-      }
+      context.go('/auth'); // Navigate to login
     }
   }
 
-  void _register() async {
-    context.go('/register');
+  void _cancel() async {
+    context.go('/auth');
   }
 
   @override
@@ -75,7 +71,6 @@ class _AuthScreenState extends State<AuthScreen> {
                 width: 200,
                 child: Image.asset('assets/images/wet_go_logo.png'),
               ),
-
               Card(
                 color: Colors.transparent,
                 elevation: 0,
@@ -87,24 +82,6 @@ class _AuthScreenState extends State<AuthScreen> {
                       key: _form,
                       child: Column(
                         children: [
-                          if (_errorMessage != null)
-                            Container(
-                              padding: EdgeInsets.all(12),
-                              margin: EdgeInsets.only(bottom: 16),
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: Colors.red.shade100,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Text(
-                                _errorMessage!,
-                                style: TextStyle(
-                                  color: Colors.red,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
                           CustomTextField(
                             label: 'Email Address',
                             keyboardType: TextInputType.emailAddress,
@@ -122,6 +99,20 @@ class _AuthScreenState extends State<AuthScreen> {
                           ),
                           SizedBox(height: 16),
                           CustomTextField(
+                            label: 'Phone',
+                            keyboardType: TextInputType.emailAddress,
+                            validator: (value) {
+                              if (value == null || value.trim().length < 6) {
+                                return 'Phone must be at least 9 characters long.';
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              _enteredPhone = value!;
+                            },
+                          ),
+                          SizedBox(height: 16),
+                          CustomTextField(
                             label: 'Password',
                             keyboardType: TextInputType.emailAddress,
                             obscureText: true,
@@ -135,27 +126,19 @@ class _AuthScreenState extends State<AuthScreen> {
                               _enteredPassword = value!;
                             },
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              BtnTextPrimary(
-                                text: "Forget password",
-                                onPressed: () {
-                                  // handle tap
-                                },
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 5),
+                          SizedBox(height: 16),
                           BtnSubmit(
-                            text: 'Login',
+                            text: 'Signup',
                             onPressed: _submit,
                             isLoading: _isLoading,
                           ),
                           SizedBox(height: 16),
-                          BtnTextPrimary(
-                            text: "Create an account",
-                            onPressed: _register,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('I already have an account?'),
+                              BtnTextPrimary(text: "Login", onPressed: _cancel),
+                            ],
                           ),
                         ],
                       ),

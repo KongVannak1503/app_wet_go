@@ -4,11 +4,15 @@ import 'package:provider/provider.dart'; // <-- Import Provider
 import 'package:wet_go/providers/application_router.dart';
 import 'package:wet_go/l10n/app_localizations.dart';
 import 'package:wet_go/providers/application_provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => ApplicationProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ApplicationProvider()),
+        // ChangeNotifierProvider(create: (_) => AuthenticatorProvider()),
+      ],
       child: const MyApp(),
     ),
   );
@@ -40,6 +44,9 @@ class MyApp extends StatelessWidget {
           seedColor: primaryBlue,
           brightness: Brightness.light,
         ).copyWith(primary: primaryBlue),
+        textTheme: GoogleFonts.notoSansKhmerTextTheme(
+          Theme.of(context).textTheme,
+        ),
       ),
       darkTheme: ThemeData(
         useMaterial3: true,
@@ -47,7 +54,11 @@ class MyApp extends StatelessWidget {
           seedColor: primaryBlue,
           brightness: Brightness.dark,
         ).copyWith(primary: primaryBlue),
+        textTheme: GoogleFonts.notoSansKhmerTextTheme(
+          Theme.of(context).textTheme,
+        ),
       ),
+
       routerConfig: applicationRouter,
       // home: const AuthScreen(),
     );
