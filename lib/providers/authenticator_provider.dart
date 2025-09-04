@@ -1,44 +1,27 @@
-import 'package:flutter/material.dart';
-import 'package:wet_go/services/api_service.dart';
+import 'package:flutter/foundation.dart';
+import 'package:wet_go/services/auth_service.dart';
 
-class AuthenticatorProvider extends ChangeNotifier {
-  final ApiService _apiService = ApiService(); // Use your Dio service
-  bool isLoading = false;
-  String? token;
+class AuthenticatorProvider with ChangeNotifier {
+  final AuthService _authService;
 
-  // REGISTER USER
-  Future<Map<String, dynamic>> register(
-    String email,
-    String phone,
-    String password,
-  ) async {
-    isLoading = true;
-    notifyListeners();
+  AuthenticatorProvider(this._authService);
 
-    final result = await _apiService.register(
-      email: email,
-      phone: phone,
-      password: password,
-    );
+  bool get isAuthenticated => _authService.isAuthenticated;
 
-    isLoading = false;
-    notifyListeners();
-    return result;
+  String? get token => _authService.token;
+  String? get userId => _authService.userId; // ✅ expose userId
+  Map<String, dynamic>? get decodedToken => _authService.decodedToken;
+
+  Future<bool> login(String email, String password) async {
+    final success = await _authService.login(email, password);
+    if (success) {
+      notifyListeners();
+    }
+    return success;
   }
 
-  // LOGIN USER
-  Future<Map<String, dynamic>> login(String email, String password) async {
-    isLoading = true;
+  void logout() {
+    _authService.logout();
     notifyListeners();
-
-    final result = await _apiService.login(email: email, password: password);
-
-    if (result['token'] != null) {
-      token = result['token']; // Save token if needed
-    }
-
-    isLoading = false;
-    notifyListeners();
-    return result;
   }
 }

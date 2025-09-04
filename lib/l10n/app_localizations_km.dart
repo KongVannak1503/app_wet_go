@@ -21,10 +21,10 @@ class AppLocalizationsKm extends AppLocalizations {
   String get language => 'ភាសា';
 
   @override
-  String get totalActive => 'សរុបសកម្ម';
+  String get totalActive => 'ចំនួនសរុបសកម្ម';
 
   @override
-  String get totalInactive => 'សរុបអសកម្ម';
+  String get totalInactive => 'ចំនួនសរុបអសកម្ម';
 
   @override
   String get scan => 'ស្កេន';
@@ -48,6 +48,12 @@ class AppLocalizationsKm extends AppLocalizations {
   String get stores => 'ហាង';
 
   @override
+  String get user => 'អ្នកប្រើប្រាស់';
+
+  @override
+  String get users => 'អ្នកប្រើប្រាស់';
+
+  @override
   String get transaction => 'ប្រតិបត្តិការ';
 
   @override
@@ -61,4 +67,7 @@ class AppLocalizationsKm extends AppLocalizations {
 
   @override
   String get noTransactionYet => 'មិនមានប្រតិបត្តិការណ៍នៅឡើយទេ';
+
+  @override
+  String get profile => 'ប្រវត្តិរូប';
 }

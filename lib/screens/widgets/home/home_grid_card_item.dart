@@ -18,7 +18,7 @@ class HomeGridCardItem extends StatelessWidget {
     return InkWell(
       borderRadius: BorderRadius.circular(12),
       onTap: () {
-        context.go(navigateTo); // GoRouter navigation
+        context.push(navigateTo); // GoRouter navigation
       },
       child: Card(
         elevation: 2,

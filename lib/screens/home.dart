@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:wet_go/providers/authenticator_provider.dart';
 import 'package:wet_go/repositories/users_repository.dart';
 import 'package:wet_go/screens/widgets/home/home_grid_card_item.dart';
 import 'package:wet_go/screens/widgets/home/stats_home_card.dart';
 import 'package:wet_go/screens/widgets/layouts/bottom_nav_bar.dart';
 import 'package:wet_go/screens/widgets/text/text_light.dart';
 import 'package:wet_go/l10n/app_localizations.dart';
-import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,41 +18,46 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final UsersRepository _usersRepo = UsersRepository();
-  String _result = "Waiting for API call...";
 
   @override
   void initState() {
     super.initState();
-    _callTestApi();
   }
 
-  Future<void> _callTestApi() async {
-    try {
-      final data = await _usersRepo.test();
-      setState(() {
-        _result = "✅ API Response: ${data['message']}";
-      });
-    } catch (e) {
-      setState(() {
-        _result = "❌ API Error: $e";
-      });
-    }
+  void _logout(BuildContext context) {
+    final authenticator = Provider.of<AuthenticatorProvider>(
+      context,
+      listen: false,
+    );
+    authenticator.logout();
   }
 
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context);
+    final authProvider = Provider.of<AuthenticatorProvider>(context);
+    final token = authProvider.token;
+    final userId = authProvider.userId;
 
-    final List<Map<String, dynamic>> gridItems = [
-      {"icon": Icons.people, "title": "Users", "route": "/users"},
-      {"icon": Icons.settings, "title": "Settings", "route": "/settings"},
-      {"icon": Icons.shopping_cart, "title": "Products", "route": "/products"},
-      {"icon": Icons.analytics, "title": "Reports", "route": "/reports"},
-    ];
+    Map<String, dynamic>? decoded; // ✅ properly declare
 
-    void _logout() {
-      context.go('/auth');
+    if (token != null) {
+      decoded = JwtDecoder.decode(token); // ✅ correct variable
+      print(decoded); // ✅ will show payload in console
     }
+    // You can print the authentication status to the console
+    print('Home Screen | Is authenticated: ${authProvider.isAuthenticated}');
+    final List<Map<String, dynamic>> gridItems = [
+      {"icon": Icons.store, "title": loc?.stores, "route": "/stores"},
+      {"icon": Icons.qr_code, "title": loc?.scanQr, "route": "/scan-qr"},
+      {
+        "icon": Icons.transform_outlined,
+        "title": loc?.transaction,
+        "route": "/transactions",
+      },
+      {"icon": Icons.people, "title": loc?.users, "route": "/users"},
+      {"icon": Icons.settings, "title": loc?.settings, "route": "/settings"},
+    ];
 
     return Scaffold(
       appBar: AppBar(
@@ -61,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(Icons.logout),
             tooltip: 'Logout',
             color: Theme.of(context).colorScheme.onPrimary,
-            onPressed: _logout,
+            onPressed: () => _logout(context),
           ),
         ],
       ),
@@ -107,18 +114,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-
-                  Text(_result),
+                  Text(
+                    'Token: ${userId ?? "No token"}',
+                    style: const TextStyle(fontSize: 14, color: Colors.blue),
+                  ),
                 ],
               ),
             ),
-
-            // Absolute container at top
             const StatsHomeCard(),
           ],
         ),
       ),
-
       bottomNavigationBar: const AppBottomNavBar(currentIndex: 0),
     );
   }

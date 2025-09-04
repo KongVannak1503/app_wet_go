@@ -13,9 +13,12 @@
   "phone": "Phone",
   "store": "Store",
   "stores": "Stores",
+  "user": "User",
+  "users": "Users",
   "transaction": "Transaction",
   "discount": "Discount",
   "createStore": "Create Store",
   "storeManagement": "Store Management",
-  "noTransactionYet": "No transaction yet"
+  "noTransactionYet": "No transaction yet",
+  "profile": "Profile"
 }

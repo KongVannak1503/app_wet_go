@@ -176,6 +176,18 @@ abstract class AppLocalizations {
   /// **'Stores'**
   String get stores;
 
+  /// No description provided for @user.
+  ///
+  /// In en, this message translates to:
+  /// **'User'**
+  String get user;
+
+  /// No description provided for @users.
+  ///
+  /// In en, this message translates to:
+  /// **'Users'**
+  String get users;
+
   /// No description provided for @transaction.
   ///
   /// In en, this message translates to:
@@ -205,6 +217,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No transaction yet'**
   String get noTransactionYet;
+
+  /// No description provided for @profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profile;
 }
 
 class _AppLocalizationsDelegate

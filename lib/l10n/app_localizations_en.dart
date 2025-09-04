@@ -48,6 +48,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get stores => 'Stores';
 
   @override
+  String get user => 'User';
+
+  @override
+  String get users => 'Users';
+
+  @override
   String get transaction => 'Transaction';
 
   @override
@@ -61,4 +67,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noTransactionYet => 'No transaction yet';
+
+  @override
+  String get profile => 'Profile';
 }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wet_go/screens/widgets/layouts/bottom_nav_bar.dart';
+import 'package:wet_go/providers/authenticator_provider.dart';
 import 'package:wet_go/screens/widgets/text/text_light.dart';
 import 'package:wet_go/l10n/app_localizations.dart';
 import 'package:wet_go/providers/application_provider.dart';
+import 'package:wet_go/screens/widgets/user/card_logout.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -13,6 +14,18 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  void _logout(BuildContext context) {
+    final authenticator = Provider.of<AuthenticatorProvider>(
+      context,
+      listen: false,
+    );
+    authenticator.logout();
+  }
+
+  void _quickSync() async {
+    // context.push('/change-password');
+  }
+
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context);
@@ -57,11 +70,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                 ),
               ),
+              SizedBox(height: 5),
+              CardLogout(
+                text: 'Logout',
+                icon: Icons.logout,
+                onTap: () => _logout(context),
+              ),
+              SizedBox(height: 5),
+              CardLogout(
+                text: 'Quick Sync',
+                icon: Icons.sync,
+                onTap: _quickSync,
+              ),
             ],
           ),
         ),
       ),
-      bottomNavigationBar: const AppBottomNavBar(currentIndex: 1),
     );
   }
 }

@@ -54,4 +54,31 @@ class UsersRepository {
       rethrow;
     }
   }
+
+  Future<Map<String, dynamic>> users() async {
+    try {
+      final response = await _dio.get(ApiConfig.users);
+      return response.data;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<Map<String, dynamic>> user(String id) async {
+    try {
+      final response = await _dio.get(ApiConfig.user(id));
+      return response.data;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<Map<String, dynamic>> deleteUser(String id) async {
+    try {
+      final response = await _dio.delete(ApiConfig.user(id));
+      return response.data;
+    } catch (e) {
+      return {"success": false, "error": e.toString()};
+    }
+  }
 }

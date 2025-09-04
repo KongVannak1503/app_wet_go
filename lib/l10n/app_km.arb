@@ -4,8 +4,8 @@
   "language": "ភាសា",
   "settings": "ការកំណត់",
   "home": "ទំព័រដើម",
-  "totalActive": "សរុបសកម្ម",
-  "totalInactive": "សរុបអសកម្ម",
+  "totalActive": "ចំនួនសរុបសកម្ម",
+  "totalInactive": "ចំនួនសរុបអសកម្ម",
   "scan": "ស្កេន",
   "scanQr": "ស្កេន QR",
   "name": "ឈ្មោះ",
@@ -13,9 +13,12 @@
   "phone": "លេខទូរស័ព្ទ",
   "store": "ហាង",
   "stores": "ហាង",
+  "user": "អ្នកប្រើប្រាស់",
+  "users": "អ្នកប្រើប្រាស់",
   "transaction": "ប្រតិបត្តិការ",
   "discount": "បញ្ចុះតម្លៃ",
   "createStore": "បង្កើតហាង",
   "storeManagement": "ការគ្រប់គ្រងហាង",
-  "noTransactionYet": "មិនមានប្រតិបត្តិការណ៍នៅឡើយទេ"
+  "noTransactionYet": "មិនមានប្រតិបត្តិការណ៍នៅឡើយទេ",
+  "profile": "ប្រវត្តិរូប"
 }

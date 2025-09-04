@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wet_go/l10n/app_localizations.dart';
 import 'package:wet_go/screens/widgets/chart/partial_circular_progress_custom.dart';
 
 class StatsHomeCard extends StatelessWidget {
@@ -6,6 +7,7 @@ class StatsHomeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context);
     return SizedBox(
       width: double.infinity,
       child: Padding(
@@ -55,7 +57,7 @@ class StatsHomeCard extends StatelessWidget {
                                     ),
                                   ),
                                   SizedBox(width: 10),
-                                  Text('Total Active'),
+                                  Text(loc?.totalActive ?? "Total Active"),
                                 ],
                               ),
                               Row(
@@ -71,7 +73,7 @@ class StatsHomeCard extends StatelessWidget {
                                     ),
                                   ),
                                   SizedBox(width: 10),
-                                  Text('Total Inactive'),
+                                  Text(loc?.totalInactive ?? "Total Inactive"),
                                 ],
                               ),
                             ],

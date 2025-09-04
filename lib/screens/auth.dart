@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:wet_go/providers/authenticator_provider.dart';
 import 'package:wet_go/repositories/users_repository.dart';
 import 'package:wet_go/screens/widgets/btn/btn_submit.dart';
 import 'package:wet_go/screens/widgets/btn/btn_text_primary.dart';
 import 'package:wet_go/screens/widgets/form/custom_text_field.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -27,22 +29,35 @@ class _AuthScreenState extends State<AuthScreen> {
 
     setState(() {
       _isLoading = true;
-      _errorMessage = null; // clear previous error
+      _errorMessage = null;
     });
 
-    final usersRepo = UsersRepository();
+    // Use the provider to get the AuthenticatorProvider instance
+    final authenticator = Provider.of<AuthenticatorProvider>(
+      context,
+      listen: false,
+    );
 
     try {
-      final result = await usersRepo.login(_enteredEmail, _enteredPassword);
+      // Call the login method on the provider, which will handle the API call and state update
+      final success = await authenticator.login(
+        _enteredEmail,
+        _enteredPassword,
+      );
 
-      print("✅ Login successful: $result");
-
-      // Navigate to home screen
-      context.go('/home');
+      if (success) {
+        // The router will automatically handle navigation
+        // You do not need to call context.go('/home')
+        print("✅ Login successful. Router will handle navigation.");
+      } else {
+        setState(() {
+          _errorMessage = 'Invalid email or password';
+        });
+      }
     } catch (e) {
-      // Catch errors like invalid email/password
+      // Catch network or other errors
       setState(() {
-        _errorMessage = 'Invalid email or password';
+        _errorMessage = 'An error occurred. Please try again.';
       });
     } finally {
       if (mounted) {
