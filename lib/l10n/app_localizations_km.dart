@@ -70,4 +70,100 @@ class AppLocalizationsKm extends AppLocalizations {
 
   @override
   String get profile => 'ប្រវត្តិរូប';
+
+  @override
+  String get pleaseEnter => 'សូមបញ្ចូល';
+
+  @override
+  String get enter => 'បញ្ចូល';
+
+  @override
+  String get owner => 'ម្ចាស់';
+
+  @override
+  String get group => 'ក្រុម';
+
+  @override
+  String get amount => 'ចំនួនទឹកប្រាក់';
+
+  @override
+  String get active => 'សកម្ម';
+
+  @override
+  String get inactive => 'អសកម្ម';
+
+  @override
+  String get create => 'បង្កើត';
+
+  @override
+  String get edit => 'កែប្រែ';
+
+  @override
+  String get delete => 'លុប';
+
+  @override
+  String get createSuccessfully => 'បង្កើតបានជោគជ័យ';
+
+  @override
+  String get editSuccessfully => 'កែប្រែបានជោគជ័យ';
+
+  @override
+  String get deleteSuccessfully => 'លុបបានជោគជ័យ';
+
+  @override
+  String get search => 'ស្វែងរក...';
+
+  @override
+  String get date => 'កាលបរិច្ឆេទ';
+
+  @override
+  String get storeId => 'លេខសម្គាល់ហាង';
+
+  @override
+  String get stallId => 'លេខសម្គាល់តូប';
+
+  @override
+  String get status => 'ស្ថានភាព';
+
+  @override
+  String get note => 'ចំណាំ';
+
+  @override
+  String get phoneMinLength6 => 'Phone must be at least 6 characters long.';
+
+  @override
+  String get phoneMinLength9 => 'Phone must be at least 9 characters long.';
+
+  @override
+  String get change => 'ប្តូរ';
+
+  @override
+  String get changePassword => 'ប្តូរពាកសម្ងាត់';
+
+  @override
+  String get logout => 'ចាកចេញ';
+
+  @override
+  String get customerSince => 'អតិថិជនចាប់តាំងពី';
+
+  @override
+  String get choose => 'ជ្រើសរើស';
+
+  @override
+  String get image => 'រូបភាព';
+
+  @override
+  String get save => 'រក្សាទុក';
+
+  @override
+  String get cancel => 'បោះបង់';
+
+  @override
+  String get confirmDelete => 'បញ្ចាក់ការលុប';
+
+  @override
+  String get deleteDescription => 'តើអ្នកប្រាកដទេថាអ្នកចង់លុបធាតុនេះ?';
+
+  @override
+  String get khSpace => '';
 }

@@ -39,14 +39,11 @@ class _HomeScreenState extends State<HomeScreen> {
     final token = authProvider.token;
     final userId = authProvider.userId;
 
-    Map<String, dynamic>? decoded; // ✅ properly declare
+    Map<String, dynamic>? decoded;
 
     if (token != null) {
-      decoded = JwtDecoder.decode(token); // ✅ correct variable
-      print(decoded); // ✅ will show payload in console
+      decoded = JwtDecoder.decode(token);
     }
-    // You can print the authentication status to the console
-    print('Home Screen | Is authenticated: ${authProvider.isAuthenticated}');
     final List<Map<String, dynamic>> gridItems = [
       {"icon": Icons.store, "title": loc?.stores, "route": "/stores"},
       {"icon": Icons.qr_code, "title": loc?.scanQr, "route": "/scan-qr"},

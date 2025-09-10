@@ -1,36 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:wet_go/repositories/users_repository.dart';
+import 'package:wet_go/providers/authenticator_provider.dart';
+import 'package:wet_go/repositories/stores_repository.dart';
+import 'package:wet_go/screens/widgets/text/head_line_1.dart';
+import 'package:provider/provider.dart';
 import 'package:wet_go/screens/widgets/layouts/confirm_delete_dialog.dart';
-import 'package:wet_go/providers/app_route.dart';
 
-class UserCardListItem extends StatelessWidget {
-  const UserCardListItem({
+class StoreCartListItem extends StatelessWidget {
+  const StoreCartListItem({
     super.key,
-    required this.id,
-    required this.email,
-    required this.phone,
     this.imagePath,
-    required this.onDelete,
-    this.onEdit,
+    required this.id,
+    required this.stallId,
+    required this.name,
+    required this.group,
+    required this.owner,
+    required this.amount,
+    required this.isActive,
+    // required this.onDelete,
+    required this.onTap,
   });
 
   final String id;
-  final String email;
-  final String phone;
+  final String stallId;
+  final String name;
+  final String owner;
+  final String group;
+  final double amount;
+  final bool isActive;
   final String? imagePath;
-  final VoidCallback onDelete;
-  final VoidCallback? onEdit;
+  // final VoidCallback onDelete;
+  final VoidCallback onTap;
 
   Future<void> _deleteUser(BuildContext context) async {
-    final repo = UsersRepository();
-    final response = await repo.deleteUser(id);
+    final authProvider = Provider.of<AuthenticatorProvider>(
+      context,
+      listen: false,
+    );
+    final token = authProvider.token;
+    final repo = StoresRepository(token: token);
+    final response = await repo.deleteStore(id);
 
     if (response['success'] == true) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('User deleted successfully')),
+        const SnackBar(content: Text('Store deleted successfully')),
       );
-      onDelete();
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Failed to delete user: ${response['error']}')),
@@ -42,7 +55,7 @@ class UserCardListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dismissible(
       key: ValueKey(id),
-      direction: DismissDirection.endToStart, // swipe right-to-left to delete
+      direction: DismissDirection.endToStart, // swipe from right to left
       background: Container(
         alignment: Alignment.centerRight,
         padding: const EdgeInsets.only(right: 20),
@@ -56,15 +69,7 @@ class UserCardListItem extends StatelessWidget {
         _deleteUser(context);
       },
       child: GestureDetector(
-        onTap: () async {
-          final updated = await context.push<bool>(
-            AppRoute.userEdit.replaceFirst(':id', id),
-          );
-
-          if (updated == true && onEdit != null) {
-            onEdit!();
-          }
-        },
+        onTap: onTap,
         child: SizedBox(
           width: double.infinity,
           child: Card(
@@ -106,14 +111,33 @@ class UserCardListItem extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          email,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
+                        HeadLine1(text: 'ID: $stallId, Name: $name'),
                         const SizedBox(height: 4),
-                        Text(phone),
+                        Text('Owner: $owner, Group: $group'),
+                        Row(
+                          children: [
+                            Text('Amount: $amount'),
+                            const SizedBox(width: 7),
+                            Container(
+                              width: 8,
+                              height: 8,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: isActive ? Colors.green : Colors.red,
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
+                  ),
+
+                  IconButton(
+                    icon: Icon(
+                      Icons.qr_code,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    onPressed: () {},
                   ),
                 ],
               ),

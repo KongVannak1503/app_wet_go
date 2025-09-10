@@ -10,4 +10,6 @@ class ApiConfig {
 
   // Store
   static String get stores => "$baseUrl/api/stores/";
+  static String get storeState => "$baseUrl/api/stores/state";
+  static String getStore(String id) => "$baseUrl/api/stores/$id";
 }

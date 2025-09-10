@@ -22,14 +22,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
     authenticator.logout();
   }
 
-  void _quickSync() async {
-    // context.push('/change-password');
-  }
-
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context);
     final appProvider = Provider.of<ApplicationProvider>(context);
+
+    void quickSync() async {
+      final appProvider = Provider.of<ApplicationProvider>(
+        context,
+        listen: false,
+      );
+
+      try {
+        await appProvider.refreshData(context);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Data synced successfully')),
+        );
+      } catch (e) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Failed to sync: $e')));
+      }
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -70,17 +84,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                 ),
               ),
+
+              SizedBox(height: 5),
+              CardLogout(
+                text: 'Quick Sync',
+                icon: Icons.sync,
+                onTap: quickSync,
+              ),
+
               SizedBox(height: 5),
               CardLogout(
                 text: 'Logout',
                 icon: Icons.logout,
                 onTap: () => _logout(context),
-              ),
-              SizedBox(height: 5),
-              CardLogout(
-                text: 'Quick Sync',
-                icon: Icons.sync,
-                onTap: _quickSync,
               ),
             ],
           ),

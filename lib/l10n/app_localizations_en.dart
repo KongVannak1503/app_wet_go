@@ -70,4 +70,100 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profile => 'Profile';
+
+  @override
+  String get pleaseEnter => 'Please enter';
+
+  @override
+  String get enter => 'enter';
+
+  @override
+  String get owner => 'Owner';
+
+  @override
+  String get group => 'Group';
+
+  @override
+  String get amount => 'Amount';
+
+  @override
+  String get active => 'Active';
+
+  @override
+  String get inactive => 'Inactive';
+
+  @override
+  String get create => 'Create';
+
+  @override
+  String get edit => 'Edit';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get createSuccessfully => 'Create Successfully';
+
+  @override
+  String get editSuccessfully => 'Edit Successfully';
+
+  @override
+  String get deleteSuccessfully => 'Delete Successfully';
+
+  @override
+  String get search => 'Search...';
+
+  @override
+  String get date => 'Date';
+
+  @override
+  String get storeId => 'StoreID';
+
+  @override
+  String get stallId => 'StallID';
+
+  @override
+  String get status => 'Status';
+
+  @override
+  String get note => 'Note';
+
+  @override
+  String get phoneMinLength6 => 'Phone must be at least 6 characters long.';
+
+  @override
+  String get phoneMinLength9 => 'Phone must be at least 9 characters long.';
+
+  @override
+  String get change => 'Change';
+
+  @override
+  String get changePassword => 'Change Password';
+
+  @override
+  String get logout => 'Logout';
+
+  @override
+  String get customerSince => 'Customer since';
+
+  @override
+  String get choose => 'Choose';
+
+  @override
+  String get image => 'Image';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get confirmDelete => 'Confirm Delete';
+
+  @override
+  String get deleteDescription => 'Are you sure you want to delete this item?';
+
+  @override
+  String get khSpace => ' ';
 }

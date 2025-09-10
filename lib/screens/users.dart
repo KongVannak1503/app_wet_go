@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:wet_go/l10n/app_localizations.dart';
+import 'package:wet_go/providers/authenticator_provider.dart';
 import 'package:wet_go/screens/widgets/text/text_light.dart';
 import 'package:wet_go/repositories/users_repository.dart';
 import 'package:wet_go/screens/widgets/user/user_card_list_item.dart';
+import 'package:provider/provider.dart';
 
 class UsersScreen extends StatefulWidget {
   const UsersScreen({super.key});
@@ -23,11 +25,21 @@ class _UsersScreenState extends State<UsersScreen> {
     _fetchUsers();
   }
 
-  final usersRepo = UsersRepository();
   Future<void> _fetchUsers() async {
+    final authProvider = Provider.of<AuthenticatorProvider>(
+      context,
+      listen: false,
+    );
+    final token = authProvider.token;
+
+    if (token == null) {
+      setState(() => _isLoading = false);
+      return;
+    }
+    final usersRepo = UsersRepository(token: token);
+
     try {
       final response = await usersRepo.users();
-      print(response);
       setState(() {
         _users = response['data'];
         _filteredUsers = _users;
@@ -37,7 +49,6 @@ class _UsersScreenState extends State<UsersScreen> {
       setState(() {
         _isLoading = false;
       });
-      print("Error: $e");
     }
   }
 
@@ -107,6 +118,7 @@ class _UsersScreenState extends State<UsersScreen> {
                               _filteredUsers.removeAt(index);
                             });
                           },
+                          onEdit: _fetchUsers,
                         );
                       },
                     ),

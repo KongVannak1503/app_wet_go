@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:wet_go/providers/authenticator_provider.dart';
-import 'package:wet_go/repositories/users_repository.dart';
 import 'package:wet_go/screens/widgets/btn/btn_submit.dart';
 import 'package:wet_go/screens/widgets/btn/btn_text_primary.dart';
 import 'package:wet_go/screens/widgets/form/custom_text_field.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:wet_go/providers/app_route.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -69,7 +69,7 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   void _register() async {
-    context.go('/register');
+    context.go(AppRoute.register);
   }
 
   @override

@@ -1,9 +1,62 @@
 import 'package:flutter/material.dart';
 import 'package:wet_go/l10n/app_localizations.dart';
+import 'package:wet_go/providers/authenticator_provider.dart';
+import 'package:wet_go/repositories/stores_repository.dart';
 import 'package:wet_go/screens/widgets/chart/partial_circular_progress_custom.dart';
+import 'package:provider/provider.dart';
 
-class StatsHomeCard extends StatelessWidget {
+class StatsHomeCard extends StatefulWidget {
   const StatsHomeCard({super.key});
+
+  @override
+  State<StatsHomeCard> createState() => _StatsHomeCardState();
+}
+
+class _StatsHomeCardState extends State<StatsHomeCard> {
+  int totalActive = 0;
+  int totalStore = 0;
+  int totalInactive = 0;
+  bool isLoading = true;
+  String? errorMessage;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchStoreState();
+  }
+
+  Future<void> _fetchStoreState() async {
+    final authProvider = Provider.of<AuthenticatorProvider>(
+      context,
+      listen: false,
+    );
+    final token = authProvider.token;
+
+    final storeRepo = StoresRepository(token: token);
+
+    try {
+      final data = await storeRepo.getStoreStateApi();
+      if (data['error'] != null) {
+        setState(() {
+          errorMessage = data['error'];
+          isLoading = false;
+        });
+      } else {
+        final storeData = data['data'] ?? {};
+        setState(() {
+          totalStore = storeData['totalStore'] ?? 0;
+          totalActive = storeData['totalStoreActive'] ?? 0;
+          totalInactive = storeData['totalStoreInactive'] ?? 0;
+          isLoading = false;
+        });
+      }
+    } catch (e) {
+      setState(() {
+        errorMessage = "Failed to load data";
+        isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +82,8 @@ class StatsHomeCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           PartialCircularProgressCustom(
-                            progress: 114 / 126, // fraction
-                            text: '114 / 126',
+                            progress: totalActive / totalStore, // fraction
+                            text: '$totalActive / $totalStore',
                             size: 150,
                             progressColor: Theme.of(
                               context,

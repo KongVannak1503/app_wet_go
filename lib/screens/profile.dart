@@ -26,15 +26,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
     _fetchUser();
   }
 
-  UsersRepository usersRepository = UsersRepository();
-
   Future<void> _fetchUser() async {
     final authProvider = Provider.of<AuthenticatorProvider>(
       context,
       listen: false,
     );
-    final userId = authProvider.userId;
+    final token = authProvider.token;
 
+    if (token == null) {
+      setState(() => _isLoading = false);
+      return;
+    }
+
+    final usersRepo = UsersRepository(token: token);
+
+    final userId = authProvider.userId;
     if (userId == null) {
       setState(() {
         _isLoading = false;
@@ -43,18 +49,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
 
     try {
-      final response = await usersRepository.user(userId);
-      print("Single user: $response");
-
+      final response = await usersRepo.user(userId);
       setState(() {
-        _user = response['data']; // ✅ single user
+        _user = response['data'];
         _isLoading = false;
       });
     } catch (e) {
       setState(() {
         _isLoading = false;
       });
-      print("Error: $e");
     }
   }
 

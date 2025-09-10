@@ -5,22 +5,20 @@ import 'package:wet_go/l10n/app_localizations.dart';
 import 'package:wet_go/providers/application_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wet_go/providers/authenticator_provider.dart';
+import 'package:wet_go/repositories/stores_repository.dart';
 import 'package:wet_go/repositories/users_repository.dart';
 import 'package:wet_go/services/auth_service.dart';
 import 'package:dio/dio.dart';
 import 'package:wet_go/services/dio_interceptor.dart';
 import 'package:wet_go/providers/application_router.dart';
 
-// Create a single, top-level instance of services and providers
-// to prevent them from being re-created on every widget rebuild.
 final dio = Dio();
-final usersRepository = UsersRepository(dio);
+final usersRepository = UsersRepository(dio: dio);
 final authService = AuthService(usersRepository);
 final authenticatorProvider = AuthenticatorProvider(authService);
 final applicationProvider = ApplicationProvider();
 
 void main() {
-  // Add the authentication interceptor to Dio
   dio.interceptors.add(AuthInterceptor(authService));
 
   runApp(
@@ -30,6 +28,14 @@ void main() {
         Provider<AuthService>(create: (_) => authService),
         ChangeNotifierProvider<AuthenticatorProvider>(
           create: (_) => authenticatorProvider,
+        ),
+        ProxyProvider<AuthenticatorProvider, StoresRepository>(
+          update: (_, authProvider, __) {
+            return StoresRepository(
+              dio: dio,
+              token: authProvider.token, // nullable String
+            );
+          },
         ),
       ],
       child: const MyApp(),
@@ -44,8 +50,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     const Color primaryBlue = Color.fromARGB(255, 26, 4, 77);
     final appProvider = Provider.of<ApplicationProvider>(context);
-
-    // Define the color schemes first
     final lightColorScheme = ColorScheme.fromSeed(
       seedColor: primaryBlue,
       brightness: Brightness.light,

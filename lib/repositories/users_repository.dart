@@ -3,8 +3,17 @@ import 'package:wet_go/services/api_config.dart';
 
 class UsersRepository {
   final Dio _dio;
+  final String? token;
 
-  UsersRepository([Dio? dio]) : _dio = dio ?? Dio();
+  UsersRepository({Dio? dio, this.token}) : _dio = dio ?? Dio();
+
+  Options _authOptions([Options? options]) {
+    final headers = {
+      'Authorization': 'Bearer $token', // Always prefix with 'Bearer '
+    };
+
+    return options?.copyWith(headers: headers) ?? Options(headers: headers);
+  }
 
   Future<Map<String, dynamic>> login(String email, String password) async {
     try {
@@ -57,7 +66,7 @@ class UsersRepository {
 
   Future<Map<String, dynamic>> users() async {
     try {
-      final response = await _dio.get(ApiConfig.users);
+      final response = await _dio.get(ApiConfig.users, options: _authOptions());
       return response.data;
     } catch (e) {
       rethrow;
@@ -66,16 +75,60 @@ class UsersRepository {
 
   Future<Map<String, dynamic>> user(String id) async {
     try {
-      final response = await _dio.get(ApiConfig.user(id));
+      final response = await _dio.get(
+        ApiConfig.user(id),
+        options: _authOptions(),
+      );
       return response.data;
     } catch (e) {
       rethrow;
     }
   }
 
+  Future<Map<String, dynamic>> editUserApi(
+    String dataId,
+    String email,
+    String phone,
+    String? password,
+    String role,
+    bool status,
+  ) async {
+    try {
+      final response = await _dio.put(
+        ApiConfig.user(dataId),
+        data: {
+          "email": email,
+          "phone": phone,
+          "password": password,
+          "role": role,
+          "isActive": status,
+        },
+        options: _authOptions(),
+      );
+
+      if (response.statusCode == 200) {
+        return response.data; // success
+      }
+
+      final errorMsg =
+          response.data['error'] ??
+          response.data['message'] ??
+          'Unexpected error';
+      return {"error": errorMsg};
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 401) {
+        return {"error": "Unauthorized. Please login again."};
+      }
+      return {"error": e.message};
+    }
+  }
+
   Future<Map<String, dynamic>> deleteUser(String id) async {
     try {
-      final response = await _dio.delete(ApiConfig.user(id));
+      final response = await _dio.delete(
+        ApiConfig.user(id),
+        options: _authOptions(),
+      );
       return response.data;
     } catch (e) {
       return {"success": false, "error": e.toString()};

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wet_go/l10n/app_localizations.dart';
+import 'package:wet_go/providers/app_route.dart';
 
 class AppBottomNavBar extends StatelessWidget {
   final int currentIndex;
@@ -14,9 +15,9 @@ class AppBottomNavBar extends StatelessWidget {
       currentIndex: currentIndex,
       onTap: (index) {
         if (index == 0) {
-          context.go('/home');
+          context.go(AppRoute.home);
         } else if (index == 1) {
-          context.go('/profile');
+          context.go(AppRoute.profile);
         }
       },
       items: [

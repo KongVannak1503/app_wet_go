@@ -223,6 +223,198 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile'**
   String get profile;
+
+  /// No description provided for @pleaseEnter.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter'**
+  String get pleaseEnter;
+
+  /// No description provided for @enter.
+  ///
+  /// In en, this message translates to:
+  /// **'enter'**
+  String get enter;
+
+  /// No description provided for @owner.
+  ///
+  /// In en, this message translates to:
+  /// **'Owner'**
+  String get owner;
+
+  /// No description provided for @group.
+  ///
+  /// In en, this message translates to:
+  /// **'Group'**
+  String get group;
+
+  /// No description provided for @amount.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get amount;
+
+  /// No description provided for @active.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get active;
+
+  /// No description provided for @inactive.
+  ///
+  /// In en, this message translates to:
+  /// **'Inactive'**
+  String get inactive;
+
+  /// No description provided for @create.
+  ///
+  /// In en, this message translates to:
+  /// **'Create'**
+  String get create;
+
+  /// No description provided for @edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get edit;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @createSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Successfully'**
+  String get createSuccessfully;
+
+  /// No description provided for @editSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Successfully'**
+  String get editSuccessfully;
+
+  /// No description provided for @deleteSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Successfully'**
+  String get deleteSuccessfully;
+
+  /// No description provided for @search.
+  ///
+  /// In en, this message translates to:
+  /// **'Search...'**
+  String get search;
+
+  /// No description provided for @date.
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get date;
+
+  /// No description provided for @storeId.
+  ///
+  /// In en, this message translates to:
+  /// **'StoreID'**
+  String get storeId;
+
+  /// No description provided for @stallId.
+  ///
+  /// In en, this message translates to:
+  /// **'StallID'**
+  String get stallId;
+
+  /// No description provided for @status.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get status;
+
+  /// No description provided for @note.
+  ///
+  /// In en, this message translates to:
+  /// **'Note'**
+  String get note;
+
+  /// No description provided for @phoneMinLength6.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone must be at least 6 characters long.'**
+  String get phoneMinLength6;
+
+  /// No description provided for @phoneMinLength9.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone must be at least 9 characters long.'**
+  String get phoneMinLength9;
+
+  /// No description provided for @change.
+  ///
+  /// In en, this message translates to:
+  /// **'Change'**
+  String get change;
+
+  /// No description provided for @changePassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Password'**
+  String get changePassword;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get logout;
+
+  /// No description provided for @customerSince.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer since'**
+  String get customerSince;
+
+  /// No description provided for @choose.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose'**
+  String get choose;
+
+  /// No description provided for @image.
+  ///
+  /// In en, this message translates to:
+  /// **'Image'**
+  String get image;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @confirmDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Delete'**
+  String get confirmDelete;
+
+  /// No description provided for @deleteDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this item?'**
+  String get deleteDescription;
+
+  /// No description provided for @khSpace.
+  ///
+  /// In en, this message translates to:
+  /// **' '**
+  String get khSpace;
 }
 
 class _AppLocalizationsDelegate
