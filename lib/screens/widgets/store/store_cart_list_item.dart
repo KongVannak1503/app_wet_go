@@ -4,6 +4,7 @@ import 'package:wet_go/repositories/stores_repository.dart';
 import 'package:wet_go/screens/widgets/text/head_line_1.dart';
 import 'package:provider/provider.dart';
 import 'package:wet_go/screens/widgets/layouts/confirm_delete_dialog.dart';
+import 'package:wet_go/screens/widgets/store/qr_code_generation.dart';
 
 class StoreCartListItem extends StatelessWidget {
   const StoreCartListItem({
@@ -137,7 +138,9 @@ class StoreCartListItem extends StatelessWidget {
                       Icons.qr_code,
                       color: Theme.of(context).colorScheme.primary,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      QrCodeGeneration.show(context, id);
+                    },
                   ),
                 ],
               ),

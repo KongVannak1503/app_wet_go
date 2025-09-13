@@ -52,5 +52,8 @@
   "cancel": "បោះបង់",
   "confirmDelete": "បញ្ចាក់ការលុប",
   "deleteDescription": "តើអ្នកប្រាកដទេថាអ្នកចង់លុបធាតុនេះ?",
+  "dashboard": "ផ្ទាំងដើម",
+  "qrScanner": "ស្កែន QR កូដ",
+  "scanPrompt": "ដាក់ QR នៅក្នុងស៊ុម ដើម្បីស្កែន",
   "khSpace": ""
 }

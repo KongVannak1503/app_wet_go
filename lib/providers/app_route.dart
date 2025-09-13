@@ -1,5 +1,6 @@
 class AppRoute {
   static const String auth = '/auth';
+  static const String dashboard = '/dashboard';
   static const String home = '/home';
   static const String register = '/register';
   static const String settings = '/settings';
@@ -10,4 +11,5 @@ class AppRoute {
   static const String stores = '/stores';
   static const String storeCreate = '/store-create';
   static const String storeUpdate = '/store-update';
+  static const String qrScanner = '/qr-scanner';
 }

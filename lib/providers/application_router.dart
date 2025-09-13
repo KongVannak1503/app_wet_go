@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 // Screens
 import 'package:wet_go/screens/auth.dart';
 import 'package:wet_go/screens/home.dart';
+import 'package:wet_go/screens/qr_code.dart';
 import 'package:wet_go/screens/register.dart';
 import 'package:wet_go/screens/settings.dart';
 import 'package:wet_go/screens/store_update.dart';
@@ -89,6 +90,14 @@ final GoRouter applicationRouter = GoRouter(
       builder: (context, state) {
         final store = state.extra as Map<String, dynamic>;
         return StoreUpdateScreen(store: store);
+      },
+    ),
+
+    // QR
+    GoRoute(
+      path: AppRoute.qrScanner,
+      builder: (context, state) {
+        return QrCodeScreen();
       },
     ),
   ],

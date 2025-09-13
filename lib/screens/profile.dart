@@ -105,7 +105,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         children: [
                           // Text('Kong Vannak'),
                           Text(
-                            'អតិថិជនចាប់តាំងពី ${_formatDate(_user?['createdAt'])}',
+                            '${foc?.customerSince} ${_formatDate(_user?['createdAt'])}',
                           ),
                           SizedBox(height: 16),
                           Row(
@@ -137,13 +137,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               SizedBox(height: 5),
               CardLogout(
-                text: 'Change Password',
+                text: '${foc?.changePassword}',
                 icon: Icons.lock,
                 onTap: _changePassword,
               ),
               SizedBox(height: 5),
               CardLogout(
-                text: 'Logout',
+                text: '${foc?.logout}',
                 icon: Icons.logout,
                 onTap: () => _logout(context),
               ),

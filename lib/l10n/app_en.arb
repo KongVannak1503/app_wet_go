@@ -52,6 +52,9 @@
   "cancel": "Cancel",
   "confirmDelete": "Confirm Delete",
   "deleteDescription": "Are you sure you want to delete this item?",
+  "dashboard": "Dashboard",
+  "qrScanner": "QR Scanner",
+  "scanPrompt": "Place a QR code inside the frame to scan",
   "khSpace": " "
 
 }

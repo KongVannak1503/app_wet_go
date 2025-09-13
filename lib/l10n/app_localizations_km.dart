@@ -165,5 +165,14 @@ class AppLocalizationsKm extends AppLocalizations {
   String get deleteDescription => 'តើអ្នកប្រាកដទេថាអ្នកចង់លុបធាតុនេះ?';
 
   @override
+  String get dashboard => 'ផ្ទាំងដើម';
+
+  @override
+  String get qrScanner => 'ស្កែន QR កូដ';
+
+  @override
+  String get scanPrompt => 'ដាក់ QR នៅក្នុងស៊ុម ដើម្បីស្កែន';
+
+  @override
   String get khSpace => '';
 }

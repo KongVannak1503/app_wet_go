@@ -165,5 +165,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleteDescription => 'Are you sure you want to delete this item?';
 
   @override
+  String get dashboard => 'Dashboard';
+
+  @override
+  String get qrScanner => 'QR Scanner';
+
+  @override
+  String get scanPrompt => 'Place a QR code inside the frame to scan';
+
+  @override
   String get khSpace => ' ';
 }

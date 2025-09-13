@@ -410,6 +410,24 @@ abstract class AppLocalizations {
   /// **'Are you sure you want to delete this item?'**
   String get deleteDescription;
 
+  /// No description provided for @dashboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Dashboard'**
+  String get dashboard;
+
+  /// No description provided for @qrScanner.
+  ///
+  /// In en, this message translates to:
+  /// **'QR Scanner'**
+  String get qrScanner;
+
+  /// No description provided for @scanPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Place a QR code inside the frame to scan'**
+  String get scanPrompt;
+
   /// No description provided for @khSpace.
   ///
   /// In en, this message translates to:

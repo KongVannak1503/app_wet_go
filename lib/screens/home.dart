@@ -8,6 +8,7 @@ import 'package:wet_go/screens/widgets/text/text_light.dart';
 import 'package:wet_go/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:wet_go/providers/app_route.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -45,15 +46,24 @@ class _HomeScreenState extends State<HomeScreen> {
       decoded = JwtDecoder.decode(token);
     }
     final List<Map<String, dynamic>> gridItems = [
-      {"icon": Icons.store, "title": loc?.stores, "route": "/stores"},
-      {"icon": Icons.qr_code, "title": loc?.scanQr, "route": "/scan-qr"},
+      {"icon": Icons.dashboard, "title": 'Dashboard', "route": AppRoute.stores},
+      {"icon": Icons.store, "title": loc?.stores, "route": AppRoute.stores},
+      {
+        "icon": Icons.qr_code,
+        "title": loc?.scanQr,
+        "route": AppRoute.qrScanner,
+      },
       {
         "icon": Icons.transform_outlined,
         "title": loc?.transaction,
         "route": "/transactions",
       },
-      {"icon": Icons.people, "title": loc?.users, "route": "/users"},
-      {"icon": Icons.settings, "title": loc?.settings, "route": "/settings"},
+      {"icon": Icons.people, "title": loc?.users, "route": AppRoute.users},
+      {
+        "icon": Icons.settings,
+        "title": loc?.settings,
+        "route": AppRoute.settings,
+      },
     ];
 
     return Scaffold(
@@ -110,10 +120,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ],
-                  ),
-                  Text(
-                    'Token: ${userId ?? "No token"}',
-                    style: const TextStyle(fontSize: 14, color: Colors.blue),
                   ),
                 ],
               ),

@@ -13,7 +13,20 @@ class ApplicationProvider extends ChangeNotifier {
   }
 
   // Example Quick Sync method
+  // Store data
+  List<Map<String, dynamic>> stores = [];
+  int totalStore = 0;
+  int totalActive = 0;
+  int totalInactive = 0;
+  bool isLoading = false;
+  String? errorMessage;
+
+  // Quick Sync method
   Future<void> refreshData(BuildContext context) async {
+    isLoading = true;
+    errorMessage = null;
+    notifyListeners();
+
     try {
       final authProvider = Provider.of<AuthenticatorProvider>(
         context,
@@ -21,18 +34,34 @@ class ApplicationProvider extends ChangeNotifier {
       );
       final token = authProvider.token;
 
-      if (token != null) {
-        final storeRepo = StoresRepository(token: token);
-        final response = await storeRepo.getStore();
-
-        if (response.containsKey('error')) {
-          throw Exception(response['error']);
-        }
+      if (token == null) {
+        throw Exception('Unauthorized');
       }
 
-      notifyListeners();
+      final storeRepo = StoresRepository(token: token);
+
+      // Fetch stores list
+      final response = await storeRepo.getStore();
+      if (response.containsKey('error')) {
+        throw Exception(response['error']);
+      }
+
+      // Fetch store state
+      final resState = await storeRepo.getStoreStateApi();
+      if (resState.containsKey('error')) {
+        throw Exception(resState['error']);
+      }
+
+      // Save data to provider
+      stores = response['data'] ?? [];
+      totalStore = resState['data']['totalStore'] ?? 0;
+      totalActive = resState['data']['totalStoreActive'] ?? 0;
+      totalInactive = resState['data']['totalStoreInactive'] ?? 0;
     } catch (e) {
-      throw Exception('Failed to sync data: $e');
+      errorMessage = e.toString();
+    } finally {
+      isLoading = false;
+      notifyListeners();
     }
   }
 }
