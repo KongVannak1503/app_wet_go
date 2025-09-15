@@ -38,7 +38,7 @@ class StoresRepository {
         queryParameters: {'page': page, 'limit': limit},
         options: _authOptions(),
       );
-
+      print(response);
       return response.data;
     } on DioException catch (e) {
       if (e.response?.statusCode == 401) {

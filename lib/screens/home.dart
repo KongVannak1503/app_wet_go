@@ -46,7 +46,11 @@ class _HomeScreenState extends State<HomeScreen> {
       decoded = JwtDecoder.decode(token);
     }
     final List<Map<String, dynamic>> gridItems = [
-      {"icon": Icons.dashboard, "title": 'Dashboard', "route": AppRoute.stores},
+      {
+        "icon": Icons.dashboard,
+        "title": loc?.dashboard,
+        "route": AppRoute.dashboard,
+      },
       {"icon": Icons.store, "title": loc?.stores, "route": AppRoute.stores},
       {
         "icon": Icons.qr_code,
@@ -94,7 +98,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   const SizedBox(height: 140),
-
                   Column(
                     children: [
                       Container(

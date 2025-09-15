@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 // Screens
 import 'package:wet_go/screens/auth.dart';
+import 'package:wet_go/screens/dashboard.dart';
 import 'package:wet_go/screens/home.dart';
 import 'package:wet_go/screens/qr_code.dart';
 import 'package:wet_go/screens/register.dart';
@@ -10,6 +11,7 @@ import 'package:wet_go/screens/settings.dart';
 import 'package:wet_go/screens/store_update.dart';
 import 'package:wet_go/screens/stores.dart';
 import 'package:wet_go/screens/store_create.dart';
+import 'package:wet_go/screens/transaction.dart';
 import 'package:wet_go/screens/users.dart';
 import 'package:wet_go/screens/user_edit.dart';
 import 'package:wet_go/screens/change_password.dart';
@@ -46,6 +48,10 @@ final GoRouter applicationRouter = GoRouter(
     GoRoute(
       path: AppRoute.home,
       builder: (context, state) => const HomeScreen(),
+    ),
+    GoRoute(
+      path: AppRoute.dashboard,
+      builder: (context, state) => const DashboardScreen(),
     ),
     GoRoute(
       path: AppRoute.register,
@@ -98,6 +104,14 @@ final GoRouter applicationRouter = GoRouter(
       path: AppRoute.qrScanner,
       builder: (context, state) {
         return QrCodeScreen();
+      },
+    ),
+
+    // Transactions
+    GoRoute(
+      path: AppRoute.transactions,
+      builder: (context, state) {
+        return TransactionScreen();
       },
     ),
   ],

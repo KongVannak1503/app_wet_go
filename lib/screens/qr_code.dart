@@ -3,6 +3,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:wet_go/l10n/app_localizations.dart';
 import 'package:wet_go/screens/widgets/text/text_light.dart';
+import 'package:wet_go/screens/widgets/transaction/unpaid_transaction_dialog.dart';
 
 class QrCodeScreen extends StatefulWidget {
   const QrCodeScreen({super.key});
@@ -58,16 +59,17 @@ class _QrCodeScreenState extends State<QrCodeScreen> {
 
     showDialog(
       context: context,
-      builder: (ctx) => AlertDialog(
-        title: const Text("QR Code Detected"),
-        content: Text(value),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(ctx).pop(),
-            child: const Text("Close"),
-          ),
-        ],
-      ),
+      builder: (ctx) => UnpaidTransactionDialog(id: value),
+      // AlertDialog(
+      //   title: const Text("QR Code Detected"),
+      //   content: Text(value),
+      //   actions: [
+      //     TextButton(
+      //       onPressed: () => Navigator.of(ctx).pop(),
+      //       child: const Text("Close"),
+      //     ),
+      //   ],
+      // ),
     ).then((_) => setState(() => isDialogOpen = false));
   }
 

@@ -12,4 +12,5 @@ class AppRoute {
   static const String storeCreate = '/store-create';
   static const String storeUpdate = '/store-update';
   static const String qrScanner = '/qr-scanner';
+  static const String transactions = '/transactions';
 }

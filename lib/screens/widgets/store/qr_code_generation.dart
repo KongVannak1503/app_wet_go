@@ -31,12 +31,13 @@ class QrCodeGeneration {
           actions: [
             TextButton(
               onPressed: () async {
-                // Request storage permission
                 final status = await Permission.storage.request();
                 if (!status.isGranted) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Permission denied ❌')),
-                  );
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Permission denied ❌')),
+                    );
+                  }
                   return;
                 }
 
@@ -45,24 +46,39 @@ class QrCodeGeneration {
 
                 Directory? directory;
 
+                // This is the hardcoded path you requested. It is not recommended.
                 if (Platform.isAndroid) {
-                  // Use public Downloads folder
                   directory = Directory('/storage/emulated/0/Download');
-                  if (!await directory.exists()) {
-                    await directory.create(recursive: true);
-                  }
                 } else if (Platform.isIOS) {
-                  // iOS uses app's Documents folder
+                  directory = await getApplicationDocumentsDirectory();
+                } else {
                   directory = await getApplicationDocumentsDirectory();
                 }
 
-                final filePath = '${directory!.path}/store-qr.png';
+                if (directory == null) {
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'Could not find a valid directory to save file.',
+                        ),
+                      ),
+                    );
+                  }
+                  return;
+                }
+
+                if (!await directory.exists()) {
+                  await directory.create(recursive: true);
+                }
+
+                final filePath = '${directory.path}/store-qr.png';
                 final file = File(filePath);
                 await file.writeAsBytes(image);
 
                 if (context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Saved at $filePath ✅')),
+                    SnackBar(content: Text('Saved to ${file.path} ✅')),
                   );
                   Navigator.of(ctx).pop();
                 }
